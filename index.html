@@ -260,6 +260,9 @@
             console.log(finalTranscript)
             if (finalTranscript == 'stop' || finalTranscript == 'pause') {
                 document.querySelector('#Resume_btn').style.display = 'block'
+                document.querySelector('#Next_btn').style.display = 'none'
+                document.querySelector('#Retry_btn').style.display = 'none'
+                
                 speechSynthesis.speak(new SpeechSynthesisUtterance("pausing"));
 
                 recognition.stop()
@@ -312,6 +315,7 @@
 
         function askagain() {
             document.querySelector('#Resume_btn').style.display = 'none'
+            document.querySelector('#Next_btn').style.display = 'block'
             speechSynthesis.speak(new SpeechSynthesisUtterance(window.key));
             window.last = new Date()
             setTimeout(function() {
