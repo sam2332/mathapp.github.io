@@ -291,7 +291,7 @@
                 window.right[window.right.length] = window.a + '*' + window.b
                 setTimeout(next, 2000)
             } else {
-                if (finalTranscript == "") {
+                if (finalTranscript.trim() == "") {
                     speechSynthesis.speak(new SpeechSynthesisUtterance(" I didnt understand, please repeat"));
                 } else {
                     speechSynthesis.speak(new SpeechSynthesisUtterance(" wrong answer, try again"));
