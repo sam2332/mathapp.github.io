@@ -199,6 +199,13 @@
         <div id='right'></div>
     </div>
     <script>
+        window.math_problems = []
+        for (var a=1;a<=10;a++){
+            for (var b=1;b<=10;b++){
+                    window.math_problems[window.math_problems.length] = a+'*'+b
+            }
+        }
+
         function makeMath(){
             tries = 1000
             while (tries > 0){
@@ -254,6 +261,14 @@
         recognition.stop()
         return
     }   
+      if (finalTranscript == 'next' || finalTranscript == 'skip'){
+        speechSynthesis.speak(new SpeechSynthesisUtterance("skipping"));
+        var x = document.getElementById(window.a+"-"+window.b);
+        x.className += ' skipped'
+        recognition.stop()
+        next()
+        return 
+    }
     finalTranscript = finalTranscript.replace(/[a-z]/g, "");
     document.querySelector('#tran').innerHTML = "You said: "+finalTranscript + '<i style="color:#ddd;">' + interimTranscript + '</>';
     if (finalTranscript == window.answer){
