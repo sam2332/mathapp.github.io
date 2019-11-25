@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>10 x 10 Multiplication Table mathapp</title>
+    <title>10 x 10 Multiplication Table </title>
     <style>
         .bold{
             font-weight: bold;
@@ -21,6 +21,10 @@
         }
         .fixed {
             background: orange;
+        }
+        .skipped{
+            background: blue;
+
         }
         .sidebyside{
             width:49%;
@@ -50,7 +54,7 @@
                 <div id='right'></div>
             </div>
         </div>
-        
+
         <div class='sidebyside'>
             <table border="1px";>
                 <thead>
@@ -73,7 +77,7 @@
                         <td id="1-9"class='head_9'>9</td>
                         <td id="1-10"class='head_10'>10</td>
                     </tr>
-                    
+
                     <tr>
                         <td id="2-1" class="bold head_2">2</td>
                         <td id="2-2" class="">4</td>
@@ -86,7 +90,7 @@
                         <td id="2-9">18</td>
                         <td id="2-10">20</td>
                     </tr>
-                    
+
                     <tr>
                         <td id="3-1" class="bold head_3">3</td>
                         <td id="3-2">6</td>
@@ -99,7 +103,7 @@
                         <td id="3-9">27</td>
                         <td id="3-10">30</td>
                     </tr>
-                    
+
                     <tr>
                         <td id="4-1" class="bold head_4">4</td>
                         <td id="4-2">8</td>
@@ -112,7 +116,7 @@
                         <td id="4-9">36</td>
                         <td id="4-10">40</td>
                     </tr>
-                    
+
                     <tr>
                         <td id="5-1" class="bold head_5">5</td>
                         <td id="5-2">10</td>
@@ -125,7 +129,7 @@
                         <td id="5-9">45</td>
                         <td id="5-10">50</td>
                     </tr>
-                    
+
                     <tr>
                         <td id="6-1" class="bold head_6">6</td>
                         <td id="6-2">12</td>
@@ -138,7 +142,7 @@
                         <td id="6-9">54</td>
                         <td id="6-10">60</td>
                     </tr>
-                    
+
                     <tr>
                         <td id="7-1" class="bold head_7">7</td>
                         <td id="7-2">14</td>
@@ -151,7 +155,7 @@
                         <td id="7-9">63</td>
                         <td id="7-10">70</td>
                     </tr>
-                    
+
                     <tr>
                         <td id="8-1" class="bold head_8">8</td>
                         <td id="8-2">16</td>
@@ -164,7 +168,7 @@
                         <td id="8-9">72</td>
                         <td id="8-10">80</td>
                     </tr>
-                    
+
                     <tr>
                         <td id="9-1" class="bold head_9">9</td>
                         <td id="9-2">18</td>
@@ -177,7 +181,7 @@
                         <td id="9-9">81</td>
                         <td id="9-10">90</td>
                     </tr>
-                    
+
                     <tr>
                         <td id="10-1" class="bold head_10">10</td>
                         <td id="10-2">20</td>
@@ -303,7 +307,7 @@ setTimeout(next,2000)
     document.querySelector('#wrong').innerHTML += '<br>' + document.querySelector('#question').innerHTML + " = " + finalTranscript + ' | ' + Seconds_Between_Dates
     var x = document.getElementById(window.a+"-"+window.b);
     x.className = 'bad'
-    
+
     window.wrong[window.wrong.length]= window.a+'*'+window.b
 }
 recognition.stop()
