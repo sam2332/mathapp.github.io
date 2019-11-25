@@ -206,28 +206,18 @@
         window.math_problems = []
         for (var a = 1; a <= 10; a++) {
             for (var b = 1; b <= 10; b++) {
-                window.math_problems[window.math_problems.length] = [a,'*',b]
+                window.math_problems[window.math_problems.length] = [a,' times ',b,a*b]
             }
         }
 
         function makeMath() {
-            tries = 1000
-            while (tries > 0) {
-                var a = Math.round(Math.random() * 9) + 1
-                var b = Math.round(Math.random() * 9) + 1
-                if (window.asked.indexOf(a + '*' + b) == -1) {
-                    window.asked[window.asked.length] = a + '*' + b
-                    window.answer = a * b
-                    window.a = a
-                    window.b = b
-
-
-                    return a + ' times ' + b
-
-                }
-                tries -= 1
-            }
-            alert('having trouble making math problem we havent done before.')
+            index = Math.round(Math.random()*window.math_problems.length)
+            data = window.math_problems[index]
+            delete window.math_problems[index]
+            window.a = data[0]
+            window.b= data[2]
+            window.anser = data[3]
+            return data[0] + data[1] +data[2]
         }
         window.asked = []
         window.wrong = []
