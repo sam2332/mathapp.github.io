@@ -19,6 +19,11 @@
 .bad {
     background: red;
 }
+.sidebyside{
+    width:49%;
+    text-align: center;
+    float:right;
+}
 </style>
 </head>
 <body>
@@ -175,8 +180,14 @@
         <div id='tran'></div>
         <hr>
         <h2>History</h2>
-        <div id='wrong'></div>
-        <div id='right'></div>
+        <div class='sidebyside'>
+            <h3>Wrong</h3>
+            <div id='wrong'></div>
+        </div>
+        <div class='sidebyside'>
+            <h3>Right</h3>
+            <div id='right'></div>
+        </div>
   <script>
     function makeMath(){
         tries = 1000
