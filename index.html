@@ -196,6 +196,8 @@
         alert('having trouble making math problem we havent done before.')
     }
     window.asked = []
+    window.wrong = []
+    window.right = []
     window.answer = null;
     window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
     let finalTranscript = '';
@@ -237,15 +239,18 @@
         x.className += ' good'
         recognition.stop() 
         finalTranscript= ''
+        window.right[window.right.length]= window.a+'*'+window.b
         setTimeout(next,2000)
       }else{
         speechSynthesis.speak(new SpeechSynthesisUtterance(" wrong answer, try again"));
         var x = document.getElementById(window.a+"-"+window.b);
         x.className += ' bad'
+        
+        window.wrong[window.wrong.length]= window.a+'*'+window.b
 
         recognition.stop()
         finalTranscript= ''
-        setTimeout(askagain,2000)
+        setTimeout(askagain,1500)
       }
 
     }
@@ -264,6 +269,10 @@
         
         next()
     }
+
+    function finished(){
+        
+    }
     function next(){
         if (window.asked.length != 100){
             window.last = new Date()
@@ -274,7 +283,7 @@
                 recognition.start();
             },700)
         }else{
-            alert('You have finished');
+            alert('You have finished the test');
         }
     }
   </script>
