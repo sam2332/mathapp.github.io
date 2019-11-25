@@ -19,6 +19,9 @@
         .bad {
             background: red;
         }
+        .fixed {
+            background: orange;
+        }
         .sidebyside{
             width:49%;
             text-align: center;
@@ -249,11 +252,16 @@
     finalTranscript = finalTranscript.replace(/[a-z]/g, "");
     document.querySelector('#tran').innerHTML = "You said: "+finalTranscript + '<i style="color:#ddd;">' + interimTranscript + '</>';
     if (finalTranscript == window.answer){
+
         speechSynthesis.speak(new SpeechSynthesisUtterance(" right answer"));
         document.querySelector('#right').innerHTML += '<br>' + document.querySelector('#question').innerHTML + " = " + finalTranscript + ' | ' + Seconds_Between_Dates
-        
+
         var x = document.getElementById(window.a+"-"+window.b);
-        x.className += ' good'
+        if (x.className.indexOf('bad')){
+                x.className = 'fixed'
+        }else{
+                x.className += ' good'
+        }
         recognition.stop() 
         finalTranscript= ''
         window.right[window.right.length]= window.a+'*'+window.b
@@ -285,7 +293,7 @@ function start(){
     document.querySelector('#Start_btn').style.display ='None'
     document.querySelector('#Retry_btn').style.display ='block'
     document.querySelector('#Next_btn').style.display ='block'
-    
+
     next()
 }
 
