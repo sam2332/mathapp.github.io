@@ -209,11 +209,11 @@
                 window.math_problems[window.math_problems.length] = [a,' times ',b,a*b]
             }
         }
+        shuffle(window.math_problems)
 
         function makeMath() {
-            index = Math.round(Math.random()*window.math_problems.length)
-            data = window.math_problems.pop(index)
-            delete window.math_problems[index]
+            console.log(window.math_problems.length)
+            data = window.math_problems.pop(0)
             window.a = data[0]
             window.b= data[2]
             window.answer = data[3]
