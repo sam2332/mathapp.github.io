@@ -277,13 +277,14 @@
             document.querySelector('#tran').innerHTML = "You said: " + finalTranscript + '<i style="color:#ddd;">' + interimTranscript + '</>';
             if (finalTranscript == window.answer) {
 
-                speechSynthesis.speak(new SpeechSynthesisUtterance(" right answer"));
                 document.querySelector('#right').innerHTML += '<br>' + document.querySelector('#question').innerHTML + " = " + finalTranscript + ' | ' + Seconds_Between_Dates
 
                 var x = document.getElementById(window.a + "-" + window.b);
                 if (x.className.indexOf('bad') != -1) {
+                    speechSynthesis.speak(new SpeechSynthesisUtterance(" better good job"));
                     x.className = 'fixed'
                 } else {
+                    speechSynthesis.speak(new SpeechSynthesisUtterance(" right answer"));
                     x.className = 'good'
                 }
                 recognition.stop()
