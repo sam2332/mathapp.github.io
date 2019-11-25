@@ -239,7 +239,7 @@
         finalTranscript= ''
         setTimeout(next,2000)
       }else{
-        speechSynthesis.speak(new SpeechSynthesisUtterance(" wrong answer"));
+        speechSynthesis.speak(new SpeechSynthesisUtterance(" wrong answer, try again"));
         var x = document.getElementById(window.a+"-"+window.b);
         x.className += ' bad'
 
@@ -265,13 +265,17 @@
         next()
     }
     function next(){
-        window.last = new Date()
-        window.key = makeMath()
-        document.querySelector('#question').innerHTML = window.key
-        speechSynthesis.speak(new SpeechSynthesisUtterance(window.key));
-        setTimeout(function(){
-            recognition.start();
-        },700)
+        if (window.asked.length != 100){
+            window.last = new Date()
+            window.key = makeMath()
+            document.querySelector('#question').innerHTML = window.key
+            speechSynthesis.speak(new SpeechSynthesisUtterance(window.key));
+            setTimeout(function(){
+                recognition.start();
+            },700)
+        }else{
+            alert('You have finished');
+        }
     }
   </script>
 </body>
