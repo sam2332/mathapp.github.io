@@ -35,7 +35,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
-
+<div class='sidebyside'>
     <table border="1px";>
         <thead>
             <tr>
@@ -176,7 +176,23 @@
             </tr>
         </tbody>
     </table>
-    <hr><button onclick='start();' id="Start_btn">Start</button>
+    </div>
+    <div class='sidebyside'>
+        <h2>History</h2>
+        <div class='sidebyside'>
+            <h3>Wrong</h3>
+            <hr>
+            <div id='wrong'></div>
+        </div>
+        <div class='sidebyside'>
+            <h3>Right</h3>
+            <hr>
+            <div id='right'></div>
+        </div>
+    </div>
+    
+    <hr>
+    <button onclick='start();' id="Start_btn">Start</button>
     <button onclick='askagain();' style='display:none;' id="Resume_btn">resume</button>
     <button onclick='askagain();' style='display:none;' id="Retry_btn">retry</button>
     <button onclick='next();' style='display:none;' id="Next_btn">Next</button>
@@ -187,17 +203,6 @@
     <h2>Transcription</h2>
     <div id='tran'></div>
     <hr>
-    <h2>History</h2>
-    <div class='sidebyside'>
-        <h3>Wrong</h3>
-        <hr>
-        <div id='wrong'></div>
-    </div>
-    <div class='sidebyside'>
-        <h3>Right</h3>
-        <hr>
-        <div id='right'></div>
-    </div>
     <script>
         window.math_problems = []
         for (var a=1;a<=10;a++){
