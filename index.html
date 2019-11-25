@@ -262,7 +262,7 @@
         document.querySelector('#right').innerHTML += '<br>' + document.querySelector('#question').innerHTML + " = " + finalTranscript + ' | ' + Seconds_Between_Dates
 
         var x = document.getElementById(window.a+"-"+window.b);
-        if (x.className.indexOf('bad')){
+        if (x.className.indexOf('bad') != -1){
                 x.className = 'fixed'
         }else{
                 x.className += ' good'
