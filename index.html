@@ -164,6 +164,7 @@
             </tbody>
         </table>
         <hr><button onclick='start();' id="Start_btn">Start</button>
+        <button onclick='askagain();' style='display:none;' id="Resume_btn">resume</button>
         <button onclick='askagain();' style='display:none;' id="Retry_btn">retry</button>
         <button onclick='next();' style='display:none;' id="Next_btn">Next</button>
 
@@ -174,7 +175,8 @@
         <div id='tran'></div>
         <hr>
         <h2>History</h2>
-        <div id='old'></div>
+        <div id='wrong'></div>
+        <div id='right'></div>
   <script>
     function makeMath(){
         tries = 1000
@@ -225,7 +227,9 @@
       }
       console.log(finalTranscript)
       if (finalTranscript == 'stop' || finalTranscript == 'pause'){
+        document.querySelector('#Resume_btn').style.display ='block'
         speechSynthesis.speak(new SpeechSynthesisUtterance("pausing"));
+
         recognition.stop()
         return
     }   
@@ -233,7 +237,7 @@
       document.querySelector('#tran').innerHTML = "You said: "+finalTranscript + '<i style="color:#ddd;">' + interimTranscript + '</>';
       if (finalTranscript == window.answer){
         speechSynthesis.speak(new SpeechSynthesisUtterance(" right answer"));
-        document.querySelector('#old').innerHTML += '<br>' + document.querySelector('#question').innerHTML + " = " + finalTranscript + ' | ' + Seconds_Between_Dates
+        document.querySelector('#right').innerHTML += '<br>' + document.querySelector('#question').innerHTML + " = " + finalTranscript + ' | ' + Seconds_Between_Dates
             
         var x = document.getElementById(window.a+"-"+window.b);
         x.className += ' good'
@@ -243,6 +247,7 @@
         setTimeout(next,2000)
       }else{
         speechSynthesis.speak(new SpeechSynthesisUtterance(" wrong answer, try again"));
+        document.querySelector('#wrong').innerHTML += '<br>' + document.querySelector('#question').innerHTML + " = " + finalTranscript + ' | ' + Seconds_Between_Dates
         var x = document.getElementById(window.a+"-"+window.b);
         x.className += ' bad'
         
@@ -256,6 +261,7 @@
     }
 
     function askagain(){
+        document.querySelector('#Resume_btn').style.display ='none'
         speechSynthesis.speak(new SpeechSynthesisUtterance(window.key));
         window.last = new Date()
         setTimeout(function(){
@@ -271,7 +277,7 @@
     }
 
     function finished(){
-        
+
     }
     function next(){
         if (window.asked.length != 100){
