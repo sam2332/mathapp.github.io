@@ -165,6 +165,7 @@
         </table>
         <hr><button onclick='start();' id="Start_btn">Start</button>
         <button onclick='askagain();' style='display:none;' id="Retry_btn">retry</button>
+        <button onclick='next();' style='display:none;' id="Next_btn">Next</button>
 
         <h2>Current Question</h2>
         <div id='question'></div>
@@ -256,6 +257,8 @@
     function start(){
         document.querySelector('#Start_btn').style.display ='None'
         document.querySelector('#Retry_btn').style.display ='block'
+        document.querySelector('#Next_btn').style.display ='block'
+        
         next()
     }
     function next(){
