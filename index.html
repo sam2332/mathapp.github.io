@@ -212,7 +212,7 @@
 
         function makeMath() {
             index = Math.round(Math.random()*window.math_problems.length)
-            data = window.math_problems[index]
+            data = window.math_problems.pop(index)
             delete window.math_problems[index]
             window.a = data[0]
             window.b= data[2]
@@ -319,10 +319,6 @@
             document.querySelector('#Next_btn').style.display = 'block'
 
             next()
-        }
-
-        function finished() {
-
         }
 
         function next() {
