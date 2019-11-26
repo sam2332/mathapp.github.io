@@ -231,7 +231,7 @@
             }
         }
 
-        function makeMathProblem() {
+        function makeNextMathProblem() {
             console.log(window.math_problems.length)
             data = window.math_problems.pop(0)
             window.a = data[0]
@@ -253,6 +253,7 @@
         window.last = new Date()
 
         recognition.onresult = (event) => {
+            console.log(event)
             let interimTranscript = '';
 
             var dif = new Date().getTime() - window.last.getTime();
@@ -274,13 +275,13 @@
                 document.querySelector('#Next_btn').style.display = 'none'
                 document.querySelector('#Retry_btn').style.display = 'none'
                 
-                speechSynthesis.speak(new SpeechSynthesisUtterance("pausing"));
+                speak("pausing");
 
                 recognition.stop()
                 return
             }
             if (finalTranscript == 'next' || finalTranscript == 'skip') {
-                speechSynthesis.speak(new SpeechSynthesisUtterance("skipping"));
+                speak("skipping");
                 var x = document.getElementById(window.a + "-" + window.b);
                 x.className += ' skipped'
                 recognition.stop()
@@ -293,13 +294,13 @@
 
                 document.querySelector('#right').innerHTML += '<br>' + document.querySelector('#question').innerHTML + " = " + finalTranscript + ' | ' + Seconds_Between_Dates
 
-                var x = document.getElementById(window.a + "-" + window.b);
-                if (x.className.indexOf('bad') != -1) {
-                    speechSynthesis.speak(new SpeechSynthesisUtterance(" better, good job"));
-                    x.className = 'fixed'
+                var x = getCell(window.a ,window.b);
+                if (x.indexOf('bad') != -1) {
+                    speak("better, good job!");
+                    markCell(window.a,window.b,'fixdd')
                 } else {
-                    speechSynthesis.speak(new SpeechSynthesisUtterance(" right answer"));
-                    x.className = 'good'
+                    speak("right answer!");
+                    markCell(window.a,window.b,'good')
                 }
                 recognition.stop()
                 finalTranscript = ''
@@ -307,13 +308,12 @@
                 setTimeout(next, 2000)
             } else {
                 if (finalTranscript.trim() == "") {
-                    speechSynthesis.speak(new SpeechSynthesisUtterance(" I didnt understand, please repeat"));
+                    speak("I didnt understand, can you repeat?");
                 } else {
-                    speechSynthesis.speak(new SpeechSynthesisUtterance(" wrong answer, try again"));
+                    speak("wrong answer, try again");
 
                     document.querySelector('#wrong').innerHTML += '<br>' + document.querySelector('#question').innerHTML + " = " + finalTranscript + ' | ' + Seconds_Between_Dates
-                    var x = document.getElementById(window.a + "-" + window.b);
-                    x.className = 'bad'
+                    markCell(window.a,window.b,'bad')
 
                     window.wrong[window.wrong.length] = window.a + '*' + window.b
 
@@ -328,11 +328,23 @@
             }
 
         }
+        function markCell(x,y,mode){
+            var x = document.getElementById(x + "-" + y);
+            x.className = mode
+        }
+        function getCell(x,y){
+            var x = document.getElementById(x + "-" + y);
+            return x.className
+
+        }
+        function speak(msg){
+            speechSynthesis.speak(new SpeechSynthesisUtterance(msg));
+        }
 
         function askagain() {
             document.querySelector('#Resume_btn').style.display = 'none'
             document.querySelector('#Next_btn').style.display = 'block'
-            speechSynthesis.speak(new SpeechSynthesisUtterance(window.key));
+            speak(window.key);
             window.last = new Date()
             setTimeout(function() {
                 recognition.start();
@@ -352,9 +364,9 @@
             shuffle(window.math_problems)
             if (window.asked.length != 100) {
                 window.last = new Date()
-                window.key = makeMath()
+                window.key = makeNextMathProblem()
                 document.querySelector('#question').innerHTML = window.key
-                speechSynthesis.speak(new SpeechSynthesisUtterance(window.key));
+                speak(window.key);
                 setTimeout(function() {
                     recognition.start();
                 }, 700)
