@@ -39,12 +39,24 @@
 			}
 			function makeCoinCollection(){
 				collection = []
-				coin_count = Math.round(Math.random()*coins.length)
+				coin_count = Math.round(Math.random()*Object.keys(coins).length)
 				for(var i  = 0; i <coin_count;i ++){
-					coin = coins[Math.round(Math.random()*coins.length)]
-					collection[collection.length] = coins[coin]
+					coin = Object.keys(coins)[Math.round(Math.random()*Object.keys(coins).length)]
+					collection[collection.length] = [coin, coins[coin]]
+
 				}
 				return collection
+			}
+
+			function drawCoinCollection(collection){
+				var ground = $('#ground')
+				ground.empty()
+				for (var i = collection.length - 1; i >= 0; i--) {
+					data = collection[i]
+					var img = $('img')
+					img.attr('src', data[0])
+					ground.append(img)
+				}
 			}
 		</script>
 	</body>
