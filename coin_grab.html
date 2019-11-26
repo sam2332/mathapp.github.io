@@ -1,19 +1,20 @@
 <html>
 	<head>
-		<title>Title</title>
+		<title>Coin Grab</title>
 		<style>
 			#ground{
-
+				height: 75%;
+				background: red;
 			}
-			#bottom{
-
+			#bottom {
+			    height: 25%;
+			    background: blue;
 			}
 		</style>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	</head>
 	</head>
 	<body>
 		<div id='ground'>
@@ -23,24 +24,27 @@
 		</div>
 		<img id='img_loader'/>
 		<script>
-			coins = [
-				'/coins/dime-back.jpg',
-				'/coins/dime-front.jpg',
-				'/coins/golden-dollar-back.jpg',
-				'/coins/golden-dollar-front.jpg',
-				'/coins/nickel-back.jpg',
-				'/coins/nickel-front.jpg',
-				'/coins/penny-back.jpg',
-				'/coins/penny-front.jpg',
-				'/coins/quarter-back.jpg',
-				'/coins/quarter-front.jpg',
-			]
-			img_loader = $('#img_loader')
-			$(document).ready(function(){
-				for (var i = coins.length - 1; i >= 0; i--) {
-					img_loader.src = coins[i]
+			coins = {
+				'/coins/dime-back.jpg':10,
+				'/coins/dime-front.jpg':10,
+				'/coins/golden-dollar-back.jpg':100,
+				'/coins/golden-dollar-front.jpg':100,
+				'/coins/nickel-back.jpg':5,
+				'/coins/nickel-front.jpg':5,
+				'/coins/penny-back.jpg':1,
+				'/coins/penny-front.jpg':1,
+				'/coins/quarter-back.jpg':25,
+				'/coins/quarter-front.jpg':25,
+			}
+			function makeCoinCollection(){
+				collection = []
+				coin_count = Math.round(Math.random()*coins.length)
+				for(var i  = 0; i <coin_count;i ++){
+					coin = coins[Math.round(Math.random()*coins)]
+					collection[collection.length] = coins[coin]
 				}
-			});
+				return collection
+			}
 		</script>
 	</body>
 </html>
