@@ -20,7 +20,7 @@
             recognition.stop()
         }
         function getNextPattern(){
-        	return [1,[1,-2,5]]
+        	return [1,[1,-2,5,3,-7]]
         }
         function speak(msg){
             speechSynthesis.speak(new SpeechSynthesisUtterance(msg));
@@ -30,9 +30,10 @@
         	var base = pattern[0]
         	s += base + ' '
         	for(var i =0;i< pattern[1].length; i ++){
-        		base += pattern[1][i]
         		s += base + ' '
+        		base += pattern[1][i]
         	}
+			s += base + ' '
         	return s
         }
 		function next(){
