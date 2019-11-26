@@ -1,0 +1,36 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<div id="question">
+		</div>
+		<button onclick='start()' id="btn_start">Start</button>
+	</body>
+	<script>
+		window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+        let finalTranscript = '';
+        let recognition = new window.SpeechRecognition();
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 10;
+        recognition.continuous = false;
+        window.last = new Date()
+
+        recognition.onresult = (event) => {
+            console.log(event)
+            recognition.stop()
+        }
+
+        function speak(msg){
+            speechSynthesis.speak(new SpeechSynthesisUtterance(msg));
+        }
+		function next(){
+
+			speak(pattern)
+			recognition.start()
+		}
+		function start(){
+			document.getElementById('btn_start').style.display = 'none'
+			next()
+		}
+	</script>
+</html>
