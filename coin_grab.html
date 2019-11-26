@@ -5,7 +5,7 @@
 			#ground{
 				height: 75%;
 				background: url(images/seamless_28_fhmhx.jpg);
-				box-shadow: inset 0px 0px 20px 10px rgba(0,0,0,0.6);
+				box-shadow: inset 0px 0px 50px 60px rgba(0,0,0,0.5)
 			}
 			#bottom {
 			    height: 25%;
@@ -41,7 +41,7 @@
 				collection = []
 				coin_count = Math.round(Math.random()*coins.length)
 				for(var i  = 0; i <coin_count;i ++){
-					coin = coins[Math.round(Math.random()*coins)]
+					coin = coins[Math.round(Math.random()*coins.length)]
 					collection[collection.length] = coins[coin]
 				}
 				return collection
