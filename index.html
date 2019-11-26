@@ -344,7 +344,7 @@
         function askagain() {
             document.querySelector('#Resume_btn').style.display = 'none'
             document.querySelector('#Next_btn').style.display = 'block'
-            speak(window.key);
+            speak(window.question);
             window.last = new Date()
             setTimeout(function() {
                 recognition.start();
@@ -364,9 +364,9 @@
             shuffle(window.math_problems)
             if (window.asked.length != 100) {
                 window.last = new Date()
-                window.key = makeNextMathProblem()
-                document.querySelector('#question').innerHTML = window.key
-                speak(window.key);
+                window.question = makeNextMathProblem()
+                document.querySelector('#question').innerHTML = window.question
+                speak(window.question);
                 setTimeout(function() {
                     recognition.start();
                 }, 700)
