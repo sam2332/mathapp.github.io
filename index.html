@@ -7,28 +7,31 @@
       <title>10 x 10 Multiplication Table </title>
       <style>
          .bold{
-         font-weight: bold;
+            font-weight: bold;
          }
          th, td {
-         padding: 15px;
-         text-align: center;
+             padding: 15px;
+             text-align: center;
          }
          .good{
-         background: green;
+            background: green;
          }
          .bad {
-         background: red;
+            background: red;
          }
          .fixed {
-         background: orange;
+            background: orange;
          }
          .skipped{
-         background: blue;
+            background: blue;
          }
          .sidebyside{
-         width:49%;
-         text-align: center;
-         float:right;
+             width:49%;
+             text-align: center;
+             float:right;
+         }
+         body{
+            padding-top:15px;
          }
       </style>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -37,7 +40,6 @@
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
    </head>
    <body>
-      <h1> </h1>
       <div>
          <div class='sidebyside'>
             <h2>History</h2>
@@ -237,7 +239,7 @@
             window.answer = data[3]
             return data[0] + data[1] +data[2]
         }
-        
+
         window.asked = []
         window.wrong = []
         window.right = []
