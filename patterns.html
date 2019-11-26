@@ -16,16 +16,29 @@
         window.last = new Date()
 
         recognition.onresult = (event) => {
-            console.log(event)
+            console.log(event.results)
             recognition.stop()
         }
-
+        function getNextPattern(){
+        	return [1,[1,-2,5]]
+        }
         function speak(msg){
             speechSynthesis.speak(new SpeechSynthesisUtterance(msg));
         }
+        function getPatternText(pattern){
+        	s = ''
+        	var base = pattern[0]
+        	s += base + ' '
+        	for(var i =0;i< pattern[1].length; i ++){
+        		base += pattern[1][i]
+        		s += base + ' '
+        	}
+        	return s
+        }
 		function next(){
-
-			speak(pattern)
+			window.pattern = getNextPattern()
+			pattern_text = getPatternText(window.pattern)
+			speak(pattern_text)
 			recognition.start()
 		}
 		function start(){
