@@ -55,14 +55,17 @@
 					var img = $('<img>')
 					img.attr('src', data[0])
 					img.css('position', 'absolute');
+					img.css('transform', 'scale('+(Math.random()*0.5)+0.3+')');
 					img.css('top', Math.round(Math.random()*(ground.height()-175))+'px');
 					img.css('left', Math.round(Math.random()*(ground.width()-175))+'px');
 					
 					ground.append(img)
 				}
 			}
-			a = makeCoinCollection()
-			drawCoinCollection(a)
+			setInterval(function(){
+				a = makeCoinCollection()
+				drawCoinCollection(a)
+			},1200)
 		</script>
 	</body>
 </html>
