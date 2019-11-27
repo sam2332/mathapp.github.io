@@ -54,6 +54,11 @@
 					data = collection[i]
 					var img = $('<img>')
 					img.attr('src', data[0])
+					img.css({
+						'position': 'relative;',
+					    'top': '39px;',
+					    'left': '150px;',
+					})
 					ground.append(img)
 				}
 			}
