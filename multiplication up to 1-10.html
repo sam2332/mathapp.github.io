@@ -37,22 +37,36 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
     <body class="h-100">
-        <div id='points'>Good(0) Bad(0)</div>
-        <div class='row h-100'>
-            <div class='col-lg-8 auto-v-middle text-center'>
-                <span id='math_question_a'>a</span>
-                <span id='math_question_operation'>op</span>
-                <span id='math_question_b'>b</span>
-                <span id='math_question_eq'>=</span>
-                <span id='math_question_answer'><input id='math_answer' type='number'/></span>
-            </div>
-            <div class='col-lg-4 auto-v-middle text-center'>
-                <progress 
-                  id='time_remaining'
-                  max=30
-                  min=0
-                  value=30
-                ></progress>
+
+        <div  class="h-100" id='menuscreen'>
+            questions?
+            <input type='number' id='question_count'/><br>
+            seconds
+            <input type='number' id='question_seconds'/><br>
+            <button id='start_btn'>Start</button>
+        </div>
+        <div class="h-100" id='reportscreen' style='display:none;'>
+            <div id ='report'></div>
+            <button id='restart_btn'>Restart</button>
+        </div>
+        <div class="h-100" id='gamescreen' style='display:none;'>
+            <div id='points'>Good(0) Bad(0)</div>
+            <div class='row h-100'>
+                <div class='col-lg-8 auto-v-middle text-center'>
+                    <span id='math_question_a'>a</span>
+                    <span id='math_question_operation'>op</span>
+                    <span id='math_question_b'>b</span>
+                    <span id='math_question_eq'>=</span>
+                    <span id='math_question_answer'><input id='math_answer' type='number'/></span>
+                </div>
+                <div class='col-lg-4 auto-v-middle text-center'>
+                    <progress 
+                      id='time_remaining'
+                      max=30
+                      min=0
+                      value=30
+                    ></progress>
+                </div>
             </div>
         </div>
         <script>
@@ -65,7 +79,9 @@
             }
 
             function endGame(){
-                $('body').html(buildReport())
+                $('#gamescreen').hide()
+                $('#report').html(buildReport())
+                $('#reportscreen').show()
             }
 
             function startGameTimer(config){
@@ -82,15 +98,27 @@
                     }
                 }.bind(this), 1000)
             }
-
+            function choose(choices) {
+              var index = Math.floor(Math.random() * choices.length);
+              return choices[index];
+            }
             function makeMathProblem(){
                 var nQ = {
                     'a':Math.round(Math.random()*9)+1,
-                    'op':'*',
+                    'op':choose(['*','/','+','-']),
                     'b': Math.round(Math.random()*9)+1
                 }
                 if (nQ['op'] == '*'){
                     window.question_answer = nQ['a'] * nQ['b']
+                }
+                if (nQ['op'] == '/'){
+                    window.question_answer = nQ['a'] / nQ['b']
+                }
+                if (nQ['op'] == '-'){
+                    window.question_answer = nQ['a'] - nQ['b']
+                }
+                if (nQ['op'] == '+'){
+                    window.question_answer = nQ['a'] + nQ['b']
                 }
                 window.question_question = nQ
                 renderQuestion()
@@ -136,15 +164,24 @@
                     checkAnswer($(this).val())
                 }
             });      
-            window.gameRunning = true
             window.game_length = 60
-            window.question_count = 30
+            window.question_count = 50
+            $('#question_count').val(window.question_count)
+            $('#question_seconds').val(window.game_length)
             function runGame(){
+                $('#gamescreen').show()
+                $('#menuscreen').hide()
+
                 startGameTimer()
                 makeMathProblem()
             }
-            $(function(){
+            $('#start_btn').click(function(){
+                window.question_count =$('#question_count').val()
+                window.game_length =$('#question_seconds').val()
                 runGame();
+            });
+            $('#restart_btn').click(function(){
+                document.location.reload()
             });
         </script>
     </body>
