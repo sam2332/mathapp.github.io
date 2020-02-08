@@ -38,6 +38,24 @@
             #math_answer_ver{
                 text-align: center;
             }
+
+            select.hor {
+    padding:0;
+    padding-left:1px;
+    border:none;
+    background-color:#eee;
+    white-space: normal;
+    height:28px;
+}
+select.hor > option {
+    height:27px;
+    width:35px;
+    text-align: center;
+    border:1px solid #000;
+    background-color:white;
+    margin-left:-1px;
+    display:inline-block;
+}
         </style>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -48,20 +66,19 @@
 
         <div  class="h-100" id='menuscreen'>
             Digits?
-            <input type='number' id='math_digits' value='2'/><br>
+            <input type='number' id='math_digits' value='1'/><br>
             questions?
             <input type='number' id='question_count'/><br>
             seconds
             <input type='number' id='question_seconds'/><br>
             <hr>
-            Multiplication:
-            <input type='checkbox' value='*' class='MathType'/><br>
-            Division:
-            <input type='checkbox' value='/' class='MathType'/><br>
-            Addition:
-            <input type='checkbox' value='+' class='MathType'/><br>
-            Subtraction:
-            <input type='checkbox' value='-' class='MathType'/><br>
+            Math Types:
+            <select  class='hor' multiple="true" id='MathType' size="10" style='overflow-y: hidden;' >
+                <option value='*'>*</option>
+                <option value='/'>/</option>
+                <option value='+'>+</option>
+                <option value='-'>-</option>
+            </select><br>
             <hr>
             Math Format:
             <select id='math_format'>
@@ -74,6 +91,33 @@
                 <option value='standard'>Standard</option>
                 <option value='timeTrial'>Time Trial</option>
             </select>
+            <hr>
+            A:
+            <select  class='hor' multiple="true" id='featuring_numbers_a' size="10" style='overflow-y: hidden;' >
+                <option value='0'>0</option>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+                <option value='6'>6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+            </select><br>
+            B:
+            <select class='hor'  multiple="true" id='featuring_numbers_b' size="10" style='overflow-y: hidden;' >
+                <option value='0'>0</option>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+                <option value='6'>6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+            </select><br>
             <hr>
             TimeTrial Time Add For Correct:
             <input type='number' id='gameMode_addTime' value='10'/>
@@ -162,13 +206,15 @@
                     debugger
                     anumber = ''
                     for(var i =0;i < window.digit_count;i++){
-                        anumber+=Math.floor(Math.random()*9)+1
+                        //anumber+=Math.floor(Math.random()*9)+1
+                        anumber += choose(window.math_numbers_a)
                     }
                     anumber = Number.parseInt(anumber)
 
                     bnumber = ''
                     for(var i =0;i < window.digit_count;i++){
-                        bnumber+=Math.floor(Math.random()*10)+1
+                        //bnumber+=Math.floor(Math.random()*10)+1
+                        bnumber += choose(window.math_numbers_b)
                     }
                     bnumber = Number.parseInt(bnumber)
 
@@ -264,12 +310,13 @@
                 window.game_length =Number.parseInt($('#question_seconds').val())
                 window.digit_count = Number.parseInt($('#math_digits').val())
                 window.math_game = $('#math_game').val()
-                window.math_types = []
-                $('.MathType').each(function(index,ele){
-                    if (ele.checked){
-                        window.math_types[window.math_types.length] = ele.value
-                    }
-                });
+
+                window.math_numbers_a =  $('#featuring_numbers_a').val()
+                window.math_numbers_b = $('#featuring_numbers_b').val()
+    
+
+                window.math_types = $('#MathType').val()
+                
                 if (window.math_types.length == 0){
                     alert('please select a math type')
                     return
