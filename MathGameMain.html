@@ -5,7 +5,7 @@
         <style>
             progress {  
                 margin-left: -50px;
-                transform: rotate(270deg) scale(5.5);
+                transform: rotate(270deg) scale(4.5);
             }
             html{
                 height: 100%;
@@ -30,7 +30,7 @@
                     vertical-align: initial;
             }
             #math_answer_hor{
-                width: 2em;
+                width: 4em;
                 outline: 5px solid black;
                 -webkit-appearance: none; 
                 margin: 0; 
@@ -48,8 +48,8 @@
     height:28px;
 }
 select.hor > option {
-    height:27px;
-    width:35px;
+    height:27px; 
+    padding: 0 8px;
     text-align: center;
     border:1px solid #000;
     background-color:white;
@@ -163,6 +163,7 @@ select.hor > option {
         </div>
         <script>
             window.asked_questions = []
+            window.question_history = []
             function buildReport(){
 
                 out = ''
@@ -201,6 +202,18 @@ select.hor > option {
               var index = Math.floor(Math.random() * choices.length);
               return choices[index];
             }
+            function isInt(n) {
+               return n % 1 === 0;
+            }
+             
+            function checkValid(q){
+                if (isInt(q['correct_answer']) == false){
+                    return false
+                }
+                
+                return true
+            }
+ 
             function makeMathProblem(){
                 do {
                     debugger
@@ -221,23 +234,37 @@ select.hor > option {
                     var nQ = {
                         'a':anumber,
                         'op':choose(window.math_types),
-                        'b': bnumber
+                        'b': bnumber,
+                        'startTime': new Date(),
+                        'endTime': null,
+                        'user_answer':null,
+                        'timing':null
                     }
-                } while(window.asked_questions.indexOf(nQ) !== -1)
+                      
+                    console.log('try',nQ)
+              
 
-                if (nQ['op'] == '*'){
-                    window.question_answer = nQ['a'] * nQ['b']
-                }
-                if (nQ['op'] == '/'){
-                    window.question_answer = nQ['a'] / nQ['b']
-                }
-                if (nQ['op'] == '-'){
-                    window.question_answer = nQ['a'] - nQ['b']
-                }
-                if (nQ['op'] == '+'){
-                    window.question_answer = nQ['a'] + nQ['b']
-                }
+                    if (nQ['op'] == '*'){
+                        nQ['correct_answer'] = nQ['a'] * nQ['b']
+                    }
+                    if (nQ['op'] == '/'){
+                        nQ['correct_answer'] = nQ['a'] / nQ['b']
+                    }
+                    if (nQ['op'] == '-'){
+                        nQ['correct_answer'] = nQ['a'] - nQ['b']
+                    }
+                    if (nQ['op'] == '+'){
+                        nQ['correct_answer'] = nQ['a'] + nQ['b']
+                    }  
+                    nQ['valid'] = checkValid(nQ)
+                    qobj = {
+                        'a':nQ['a'],
+                        'op':nQ['op'],
+                        'b':nQ['b']
+                    }
+                } while(window.asked_questions.indexOf(qobj) !== -1 || nQ['valid'] == false)
                 window.question_question = nQ
+                window.asked_questions[window.asked_questions.length]= qobj
                 renderQuestion()
             }
             
@@ -269,12 +296,16 @@ select.hor > option {
                 makeMathProblem()
             }
             function checkAnswer(answer){
-                console.log('checking answer',answer,window.question_answer)
-                if (answer == window.question_answer)
+                console.log('checking answer',answer,window.question_question)
+                window.question_question['endTime'] = new Date();
+                window.question_question['user_answer'] = answer
+                if (answer == window.question_question['correct_answer'])
                     addGood()
                 else{
                     addBad()
                 }
+                window.question_question['timing'] = Math.abs(window.question_question['startTime'] - window.question_question['endTime']) / 1000
+                window.question_history[window.question_history.length]= window.question_question
                 $('#math_answer_'+window.math_format).val('')
             }
             $('#math_answer_ver, #math_answer_hor').on('keypress',function(e) {
@@ -319,6 +350,14 @@ select.hor > option {
                 
                 if (window.math_types.length == 0){
                     alert('please select a math type')
+                    return
+                }
+                if (window.math_numbers_a.length == 0){
+                    alert('please select A Numbers')
+                    return
+                }
+                if (window.math_numbers_b.length == 0){
+                    alert('please select B Numbers')
                     return
                 }
 
