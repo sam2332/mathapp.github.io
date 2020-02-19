@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>MathGame</title>
+        <title>MathGame.io</title>
         <style>
             progress {  
                 margin-left: -50px;
@@ -11,7 +11,7 @@
                 height: 100%;
             }
             span#vert_operator {
-                position: relative;
+                position: relative; 
                 top: -25px;
                 left: -38px;
             }
@@ -75,7 +75,7 @@ select.hor > option {
             Math Types:
             <select  class='hor' multiple="true" id='MathType' size="10" style='overflow-y: hidden;' >
                 <option value='*'>*</option>
-                <option value='/'>/</option>
+                <option value='÷'>÷</option>
                 <option value='+'>+</option>
                 <option value='-'>-</option>
             </select><br>
@@ -247,7 +247,7 @@ select.hor > option {
                     if (nQ['op'] == '*'){
                         nQ['correct_answer'] = nQ['a'] * nQ['b']
                     }
-                    if (nQ['op'] == '/'){
+                    if (nQ['op'] == '÷'){
                         nQ['correct_answer'] = nQ['a'] / nQ['b']
                     }
                     if (nQ['op'] == '-'){
